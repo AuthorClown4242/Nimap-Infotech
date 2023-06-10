@@ -1,0 +1,45 @@
+﻿@model Nimap.Models.PagedProductCategoryViewModel
+
+@{
+    ViewBag.Title = "Home Page";
+}
+<style>
+    .pagination {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+</style>
+<h2>Product List</h2>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>ProductId</th>
+            <th>ProductName</th>
+            <th>CategoryId</th>
+            <th>CategoryName</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var product in Model.Products)
+        {
+            <tr>
+                <td>@product.ProductId</td>
+                <td>@product.ProductName</td>
+                <td>@product.CategoryId</td>
+                <td>@product.CategoryName</td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<div>
+    <a href="@Url.Action("", "Product")" class="btn btn-primary">Add Product</a>
+    <a href="@Url.Action("", "Category")" class="btn btn-primary">Add Category</a>
+</div>
+<div class="pagination text-center">
+    @for (int i = 1; i <= Model.TotalPages; i++)
+    {
+        <a href="@Url.Action("Index", new { page = i })" class="page-link">@i</a>
+    }
